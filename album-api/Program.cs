@@ -5,7 +5,7 @@ using System.Text.Json;
 var builder = WebApplication.CreateBuilder();
 
 var DefaultHttpPort = Environment.GetEnvironmentVariable("DAPR_HTTP_PORT") ?? "3500";
-var AlbumStateStore = "statestore";
+var AlbumStateStore = Environment.GetEnvironmentVariable("PRODUCT_STATE_STORE") ?? "statestore";
 var CollectionId = Environment.GetEnvironmentVariable("COLLECTION_ID") ?? "GreatestHits";
 
 // Add services to the container.
@@ -35,8 +35,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors();
 
-app.Urls.Add("http://0.0.0.0:${ASPNETCORE_URLS}");
-
 app.MapGet("/", async context =>
 {
     await context.Response.WriteAsync("Hit the /albums endpoint to retrieve a list of albums!");
@@ -45,7 +43,7 @@ app.MapGet("/", async context =>
 app.MapGet("/albums", async (HttpContext context, HttpClient client) => 
 {
     // Get the albums from the state store.
-    var response = await client.GetAsync($"http://127.0.0.1:{DefaultHttpPort}/v1.0/state/{AlbumStateStore}/{CollectionId}");
+    var response = await client.GetAsync($"http://localhost:{DefaultHttpPort}/v1.0/state/{AlbumStateStore}/{CollectionId}");
     var json = await response.Content.ReadAsStringAsync(); 
     
     if (!response.IsSuccessStatusCode)

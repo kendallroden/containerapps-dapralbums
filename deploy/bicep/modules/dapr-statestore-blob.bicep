@@ -9,7 +9,7 @@ resource caEnvironment  'Microsoft.App/managedEnvironments@2022-06-01-preview' e
 
 resource daprComponent 'Microsoft.App/managedEnvironments/daprComponents@2022-06-01-preview' = {
   parent: caEnvironment
-  name: 'statestore'
+  name: 'statestore-blob'
   properties: {
     componentType: 'state.azure.blobstorage'
     version: 'v1'

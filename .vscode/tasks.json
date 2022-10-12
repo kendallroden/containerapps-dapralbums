@@ -3,7 +3,7 @@
   "tasks": [
     {
       "label": "build",
-      "command": "/usr/local/share/dotnet/dotnet",
+      "command": "dotnet",
       "type": "process",
       "args": [
         "build",
@@ -11,11 +11,14 @@
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"
       ],
-      "problemMatcher": "$msCompile"
+      "problemMatcher": "$msCompile",
+      "presentation": {
+        "close": true
+      },
     },
     {
       "label": "publish",
-      "command": "/usr/local/bin/dotnet",
+      "command": "dotnet",
       "type": "process",
       "args": [
         "publish",
@@ -27,7 +30,7 @@
     },
     {
       "label": "watch",
-      "command": "/usr/local/bin/dotnet",
+      "command": "dotnet",
       "type": "process",
       "args": [
         "watch",
@@ -94,7 +97,7 @@
         "--components-path",
         "${workspaceFolder}/dapr-components/local",
         "--app-port",
-        "80",
+        "8080",
         "--dapr-grpc-port",
         "3501",
         "--dapr-http-port",

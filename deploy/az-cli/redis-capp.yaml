@@ -1,0 +1,23 @@
+kind: containerapp
+location: centralus
+name: local-redis
+resourceGroup: dapr-albums-ignite
+type: Microsoft.App/containerApps
+properties:
+  managedEnvironmentId: /subscriptions/9dfddf6a-d99a-42a6-9fe5-9620719a8f6f/resourceGroups/dapr-albums-ignite/providers/Microsoft.App/managedEnvironments/ignite-albums-demo
+  configuration:
+    ingress:
+      external: false
+      allowInsecure: false
+      targetPort: 6379
+      transport: tcp
+  template:
+    containers:
+      - image: docker.io/redis:7.0
+        name: redis
+        resources:
+          cpu: 0.5
+          memory: 1Gi
+    scale:
+      minReplicas: 1
+      maxReplicas: 3

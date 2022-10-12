@@ -1,0 +1,9 @@
+
+@port = 3500
+@albumStateStore = "statestore"
+@collectionId = "GreatestHits"
+
+GET http://localhost:{{port}}/v1.0/state/{{albumStateStore}}/{{collectionId}} HTTP/1.1
+content-type: application/json
+
+  

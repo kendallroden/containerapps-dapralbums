@@ -10,7 +10,7 @@ const Background = process.env.BACKGROUND_COLOR || "black";
 /* GET home page. */
 router.get("/", async function (req, res, next) {
   try {
-    const url = `http://127.0.0.1:${DaprHttpPort}/v1.0/invoke/${AlbumService}/method/albums`;
+    const url = `http://localhost:${DaprHttpPort}/v1.0/invoke/${AlbumService}/method/albums`;
     console.log("Invoking album-api via dapr: " + url);
     axios.headers = { "Content-Type": "application/json" };
     var response = await axios.get(url);
